@@ -1,653 +1,284 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#080b16">
-<meta name="description" content="Explore the portfolio, AI projects, skills, and learning journey of an aspiring AI engineer.">
-<title>Faran Haider | AI Engineer Portfolio</title>
-
-<style>
-:root {
-  --bg: #080b16;
-  --panel: #101629;
-  --text: #f4f7ff;
-  --muted: #a1abc3;
-  --blue: #61a5ff;
-  --purple: #ad82ff;
-  --border: rgba(255,255,255,.10);
-}
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  scroll-behavior: smooth;
-}
-body {
-  font-family: Arial, Helvetica, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  line-height: 1.7;
-  overflow-x: hidden;
-}
-a { color: inherit; text-decoration: none; }
-button, a { -webkit-tap-highlight-color: transparent; }
-.container { width: min(1100px, 90%); margin: auto; }
-section { padding: 90px 0; scroll-margin-top: 75px; }
-.section-title { text-align: center; margin-bottom: 42px; }
-.section-title h2 { font-size: clamp(28px, 4vw, 40px); }
-.section-title p { color: var(--muted); margin-top: 8px; }
-.gradient {
-  background: linear-gradient(100deg, var(--blue), var(--purple));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-header {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  background: rgba(8,11,22,.88);
-  backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--border);
-}
-.nav {
-  min-height: 70px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-}
-.logo { font-size: 21px; font-weight: 800; }
-.nav-links { display: flex; gap: 24px; align-items: center; }
-.nav-links a { color: var(--muted); font-size: 14px; }
-.nav-links a:hover { color: var(--blue); }
-.menu-btn {
-  display: none;
-  color: white;
-  background: var(--panel);
-  border: 1px solid var(--border);
-  padding: 8px 12px;
-  border-radius: 8px;
-  cursor: pointer;
-}
-.hero {
-  min-height: 85vh;
-  display: flex;
-  align-items: center;
-  position: relative;
-  overflow: hidden;
-  background:
-    radial-gradient(ellipse at 80% 35%, rgba(99,102,241,.14), transparent 45%),
-    radial-gradient(ellipse at 15% 70%, rgba(14,165,233,.10), transparent 40%);
-}
-#network {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
-.hero-content { position: relative; z-index: 1; max-width: 760px; }
-.eyebrow {
-  display: inline-block;
-  border: 1px solid rgba(97,165,255,.35);
-  background: rgba(97,165,255,.08);
-  color: #a9d0ff;
-  border-radius: 30px;
-  padding: 7px 14px;
-  font-size: 13px;
-  margin-bottom: 23px;
-}
-.hero h1 {
-  font-size: clamp(39px, 7vw, 72px);
-  line-height: 1.12;
-  letter-spacing: -2px;
-}
-.hero h1 span { display: block; }
-.hero p {
-  max-width: 620px;
-  color: var(--muted);
-  font-size: 17px;
-  margin: 22px 0 30px;
-}
-.actions { display: flex; flex-wrap: wrap; gap: 13px; }
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 12px 21px;
-  border-radius: 10px;
-  font-weight: 700;
-  font-size: 14px;
-  border: 1px solid var(--border);
-  transition: transform .25s, box-shadow .25s;
-}
-.btn:hover { transform: translateY(-3px); }
-.btn-primary {
-  background: linear-gradient(110deg, #438fff, #9264f5);
-  color: white;
-  border: none;
-  box-shadow: 0 8px 30px rgba(89,117,255,.18);
-}
-.btn-secondary { background: rgba(255,255,255,.04); }
-.about-grid {
-  display: grid;
-  grid-template-columns: 1.2fr .8fr;
-  gap: 28px;
-  align-items: stretch;
-}
-.card {
-  background: linear-gradient(145deg, rgba(19,27,48,.92), rgba(12,17,32,.95));
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  padding: 27px;
-  transition: transform .25s, border-color .25s;
-}
-.card:hover {
-  transform: translateY(-5px);
-  border-color: rgba(97,165,255,.45);
-}
-.card h3 { margin-bottom: 12px; font-size: 19px; }
-.card p { color: var(--muted); }
-.focus-list { display: grid; gap: 15px; }
-.focus-item { display: flex; gap: 13px; align-items: flex-start; }
-.focus-icon { font-size: 23px; }
-.focus-item p { font-size: 14px; }
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
-}
-.skill-card h3 { color: #c6d9ff; }
-.tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 17px; }
-.tag {
-  padding: 6px 10px;
-  font-size: 12px;
-  border: 1px solid var(--border);
-  border-radius: 7px;
-  background: rgba(255,255,255,.035);
-  color: #d5dced;
-}
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-}
-.project-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 20px;
-}
-.project-icon {
-  display: grid;
-  place-items: center;
-  width: 48px;
-  height: 48px;
-  font-size: 25px;
-  border-radius: 13px;
-  background: linear-gradient(135deg, #1d3d70, #39265f);
-}
-.project-number { color: #71809e; font-size: 13px; }
-.project-links { display: flex; gap: 17px; margin-top: 20px; }
-.project-links a { color: #9fc8ff; font-size: 13px; }
-.project-links a:hover { text-decoration: underline; }
-.timeline { max-width: 750px; margin: auto; }
-.timeline .card { margin-bottom: 17px; }
-.timeline small { color: var(--blue); }
-.contact-card { text-align: center; max-width: 750px; margin: auto; }
-.contact-card p { max-width: 570px; margin: 12px auto 25px; }
-.contact-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
-footer {
-  border-top: 1px solid var(--border);
-  padding: 25px 0;
-  text-align: center;
-  color: var(--muted);
-  font-size: 13px;
-}
-.reveal {
-  opacity: 0;
-  transform: translateY(22px);
-  transition: opacity .7s ease, transform .7s ease;
-}
-.reveal.visible { opacity: 1; transform: translateY(0); }
-#top-btn {
-  position: fixed;
-  right: 20px;
-  bottom: 20px;
-  z-index: 8;
-  display: none;
-  width: 43px;
-  height: 43px;
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  background: var(--panel);
-  color: white;
-  font-size: 21px;
-  cursor: pointer;
-}
-@media (max-width: 760px) {
-  .menu-btn { display: block; }
-  .nav { flex-wrap: wrap; padding: 13px 0; }
-  .nav-links {
-    display: none;
-    width: 100%;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0;
-  }
-  .nav-links.open { display: flex; }
-  .nav-links a { padding: 10px 0; width: 100%; }
-  section { padding: 65px 0; }
-  .hero { min-height: 78vh; }
-  .hero h1 { letter-spacing: -1px; }
-  .about-grid, .skills-grid, .projects-grid {
-    grid-template-columns: 1fr;
-  }
-  .card { padding: 22px; }
-}
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    scroll-behavior: auto !important;
-    animation-duration: .01ms !important;
-    transition-duration: .01ms !important;
-  }
-  .reveal { opacity: 1; transform: none; }
-}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080b18">
+  <meta name="description" content="Faran Haider — AI Engineer and Entrepreneur. Exploring practical AI, intelligent automation, and digital products that solve real-world problems.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Faran Haider | AI Engineer & Entrepreneur">
+  <meta property="og:description" content="Building useful AI-powered products, automations, and digital experiences.">
+  <meta property="og:url" content="https://faranh12.github.io/">
+  <title>Faran Haider | AI Engineer & Entrepreneur</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#080b18;--bg2:#0c1122;--surface:rgba(17,24,45,.78);--surface2:#111a31;--text:#f4f7ff;--muted:#a3aec5;--line:rgba(183,199,255,.13);--blue:#6aa9ff;--violet:#a88bff;--cyan:#70e0dc;--max:1160px}
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;scroll-padding-top:90px}
+    body{font-family:"DM Sans",sans-serif;background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden}
+    body:before{content:"";position:fixed;inset:0;z-index:-2;background:radial-gradient(ellipse at 75% 8%,rgba(87,91,220,.16),transparent 35%),radial-gradient(ellipse at 8% 48%,rgba(38,151,187,.10),transparent 34%),linear-gradient(180deg,#080b18,#0a1020 55%,#080b18)}
+    a{color:inherit;text-decoration:none}button{font:inherit}
+    .wrap{width:min(var(--max),calc(100% - 48px));margin:auto}
+    .section{padding:112px 0}
+    .kicker{display:inline-flex;align-items:center;gap:9px;color:#b8d5ff;font-size:.76rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase}
+    .kicker:before{content:"";width:22px;height:1px;background:linear-gradient(90deg,var(--blue),var(--violet))}
+    h1,h2,h3,h4{font-family:Manrope,sans-serif;letter-spacing:-.035em;line-height:1.15}
+    h2{font-size:clamp(2rem,4vw,3.1rem);margin:14px 0}
+    .gradient{background:linear-gradient(105deg,#80bdff 8%,#9b91ff 55%,#77e1dd);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .section-intro{max-width:660px;color:var(--muted);font-size:1.02rem}
+    .section-head{margin-bottom:44px}
+    .section-head.center{text-align:center}.section-head.center .section-intro{margin:0 auto}
+    .topbar{position:sticky;top:0;z-index:50;background:rgba(8,11,24,.78);border-bottom:1px solid var(--line);backdrop-filter:blur(18px)}
+    .nav{height:78px;display:flex;align-items:center;justify-content:space-between;gap:28px}
+    .brand{font:800 1.35rem Manrope,sans-serif;letter-spacing:-.06em}.brand b{color:var(--blue)}
+    .navlinks{display:flex;align-items:center;gap:28px}.navlinks a{font-size:.87rem;color:#c0c9dc;transition:color .2s}.navlinks a:hover,.navlinks a.active{color:white}
+    .nav-cta{padding:10px 17px;border:1px solid rgba(120,168,255,.4);border-radius:9px;color:#dceaff!important}
+    .menu{display:none;background:transparent;border:1px solid var(--line);color:white;border-radius:9px;padding:8px 12px}
+    .hero{min-height:calc(100svh - 78px);display:flex;align-items:center;position:relative;padding:92px 0 100px;isolation:isolate}
+    #particles{position:absolute;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none;opacity:.65}
+    .hero-grid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(270px,.7fr);align-items:center;gap:60px}
+    .availability{display:inline-flex;align-items:center;gap:9px;padding:8px 13px;border:1px solid var(--line);border-radius:99px;background:rgba(17,27,49,.65);font-size:.78rem;color:#c6d4eb;margin-bottom:28px}
+    .pulse{width:7px;height:7px;border-radius:50%;background:#6de0b2;box-shadow:0 0 0 5px rgba(109,224,178,.12)}
+    .hero h1{font-size:clamp(3.15rem,7.4vw,6.4rem);font-weight:800;max-width:850px;letter-spacing:-.07em}
+    .hero h1 .line{display:block}.hero h1 .role{font-size:.47em;letter-spacing:-.04em;color:#d8e2f5;margin-top:15px}
+    .hero-copy{max-width:650px;color:#aebbd2;font-size:1.12rem;margin:25px 0 31px}
+    .hero-actions{display:flex;flex-wrap:wrap;gap:13px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:13px 20px;border-radius:10px;font-weight:700;font-size:.9rem;transition:transform .22s,border-color .22s,background .22s}
+    .btn:hover{transform:translateY(-3px)}
+    .primary{background:linear-gradient(110deg,#438fff,#866cf5);color:white;box-shadow:0 12px 32px rgba(75,113,255,.2)}
+    .secondary{border:1px solid var(--line);background:rgba(255,255,255,.035);color:#e4ebfa}
+    .hero-meta{display:flex;gap:28px;flex-wrap:wrap;margin-top:45px;color:#8998b3;font-size:.78rem}
+    .hero-meta strong{display:block;color:#e6edfb;font:700 1.02rem Manrope,sans-serif;margin-bottom:2px}
+    .profile-panel{position:relative;padding:28px;border:1px solid rgba(151,176,255,.2);border-radius:22px;background:linear-gradient(145deg,rgba(24,35,66,.83),rgba(12,18,35,.9));box-shadow:0 28px 90px rgba(0,0,0,.22)}
+    .profile-panel:before{content:"";position:absolute;inset:-1px;border-radius:22px;padding:1px;background:linear-gradient(140deg,rgba(111,177,255,.5),transparent 42%,rgba(168,139,255,.3));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+    .panel-top{display:flex;justify-content:space-between;align-items:center;color:#93a5c5;font-size:.75rem;margin-bottom:28px}
+    .panel-symbol{height:66px;width:66px;display:grid;place-items:center;border-radius:18px;background:linear-gradient(135deg,rgba(85,155,255,.2),rgba(158,117,255,.22));border:1px solid rgba(151,176,255,.22);font:800 1.5rem Manrope,sans-serif;color:#c7ddff}
+    .profile-panel h3{font-size:1.45rem;margin:19px 0 8px}.profile-panel p{font-size:.88rem;color:var(--muted)}
+    .panel-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}.panel-tags span,.chip{border:1px solid var(--line);border-radius:7px;padding:6px 9px;font-size:.72rem;color:#c9d6ec;background:rgba(255,255,255,.025)}
+    .panel-bottom{display:flex;align-items:center;justify-content:space-between;margin-top:27px;padding-top:18px;border-top:1px solid var(--line);font-size:.75rem;color:#9baac4}
+    .panel-bottom b{color:#dce8ff}
+    .trust-strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:rgba(255,255,255,.018)}
+    .trust-inner{display:flex;align-items:center;justify-content:space-between;gap:25px;padding:24px 0;color:#a5b3cb;font-size:.83rem}
+    .trust-inner strong{font:700 .85rem Manrope,sans-serif;color:#e0e9fa}
+    .about-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:22px}
+    .surface{border:1px solid var(--line);border-radius:17px;background:var(--surface);padding:30px}
+    .surface p{color:var(--muted)}.surface p+p{margin-top:15px}
+    .principles{display:grid;gap:13px}.principle{display:flex;gap:14px;align-items:flex-start;padding:14px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.02)}
+    .principle-icon{flex:0 0 36px;width:36px;height:36px;display:grid;place-items:center;border-radius:10px;background:rgba(100,155,255,.13);color:#a8cbff;font-size:1.05rem}
+    .principle strong{font:700 .91rem Manrope,sans-serif}.principle p{font-size:.81rem;margin-top:3px}
+    .service-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}
+    .service{padding:25px;min-height:220px;transition:transform .25s,border-color .25s}.service:hover,.project:hover{transform:translateY(-5px);border-color:rgba(111,169,255,.4)}
+    .service-icon{font-size:1.4rem;margin-bottom:22px}.service h3{font-size:1.1rem;margin-bottom:10px}.service p{font-size:.88rem;color:var(--muted)}
+    .service small{display:block;color:#9dc4ff;font-size:.72rem;margin-top:18px;letter-spacing:.05em}
+    .skill-layout{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+    .skillbox h3{font-size:1.04rem;margin-bottom:15px}.skillbox p{color:var(--muted);font-size:.84rem;margin-bottom:15px}
+    .chips{display:flex;flex-wrap:wrap;gap:8px}
+    .project-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+    .project{padding:27px;transition:transform .25s,border-color .25s}
+    .project-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:23px}
+    .project-icon{width:46px;height:46px;display:grid;place-items:center;border-radius:13px;background:linear-gradient(135deg,rgba(83,148,255,.2),rgba(153,112,255,.2));font-size:1.25rem}
+    .status{font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;color:#b6c8e6;border:1px solid var(--line);padding:5px 8px;border-radius:6px}
+    .project h3{font-size:1.2rem;margin-bottom:10px}.project p{font-size:.88rem;color:var(--muted)}
+    .project .chips{margin-top:18px}.project-note{font-size:.75rem!important;color:#8798b5!important;margin-top:15px}
+    .process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}
+    .step{padding:22px;border-top:1px solid rgba(130,171,255,.45);background:linear-gradient(180deg,rgba(22,32,57,.7),rgba(12,17,31,.25));border-radius:0 0 12px 12px}
+    .step span{font:800 .78rem Manrope,sans-serif;color:#8bbaff}.step h3{font-size:.98rem;margin:14px 0 8px}.step p{font-size:.8rem;color:var(--muted)}
+    .growth{display:grid;grid-template-columns:.7fr 1.3fr;gap:22px}
+    .growth-card h3{font-size:1.1rem;margin-bottom:12px}.growth-card p{font-size:.87rem;color:var(--muted)}
+    .growth-list{display:grid;gap:12px}.growth-row{display:flex;justify-content:space-between;gap:18px;padding:15px 0;border-bottom:1px solid var(--line);font-size:.87rem}.growth-row span{color:var(--muted);text-align:right}
+    .contact{position:relative;overflow:hidden;text-align:center;padding:58px 35px;background:radial-gradient(ellipse at 50% 0,rgba(97,125,255,.16),transparent 60%),rgba(17,24,45,.8)}
+    .contact h2{max-width:720px;margin:14px auto}.contact .section-intro{margin:0 auto 26px}
+    .contact-actions{display:flex;justify-content:center;flex-wrap:wrap;gap:12px}
+    footer{padding:26px 0;border-top:1px solid var(--line);color:#8795ae;font-size:.78rem}
+    .footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+    .footer-links{display:flex;gap:18px}.footer-links a:hover{color:white}
+    .reveal{opacity:0;transform:translateY(18px);transition:opacity .65s ease,transform .65s ease}.reveal.show{opacity:1;transform:none}
+    @media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:40px}.profile-panel{max-width:520px}.service-grid{grid-template-columns:repeat(2,1fr)}.process-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:680px){.wrap{width:min(100% - 34px,var(--max))}.section{padding:78px 0}.nav{height:68px}.menu{display:block}.navlinks{display:none;position:absolute;left:17px;right:17px;top:67px;padding:13px;background:#10182c;border:1px solid var(--line);border-radius:13px;flex-direction:column;align-items:stretch;gap:0}.navlinks.open{display:flex}.navlinks a{padding:10px 9px}.nav-cta{margin-top:5px;text-align:center}.hero{min-height:auto;padding:86px 0}.hero h1{font-size:clamp(3rem,14vw,4.5rem)}.hero-copy{font-size:1rem}.hero-meta{gap:19px}.trust-inner{justify-content:center;flex-wrap:wrap;text-align:center}.about-grid,.skill-layout,.project-grid,.growth{grid-template-columns:1fr}.service-grid{grid-template-columns:1fr}.process-grid{grid-template-columns:1fr 1fr}.surface{padding:23px}.contact{padding:42px 20px}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}.reveal{opacity:1;transform:none}}
+  </style>
 </head>
-
 <body>
-<header>
-  <div class="container nav">
-    <a class="logo" href="#home">FH<span class="gradient">.</span></a>
-    <button class="menu-btn" id="menu-btn" aria-label="Open navigation"
-      aria-expanded="false" aria-controls="nav-links">☰ Menu</button>
-    <nav class="nav-links" id="nav-links" aria-label="Main navigation">
-      <a href="#home">Home</a>
-      <a href="#about">About</a>
-      <a href="#skills">Skills</a>
-      <a href="#projects">Projects</a>
-      <a href="#education">Education</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </div>
-</header>
-
-<main>
-<section class="hero" id="home">
-  <canvas id="network" aria-hidden="true"></canvas>
-  <div class="container hero-content reveal">
-    <span class="eyebrow">✦ AI Student · Future AI Engineer</span>
-    <h1>Building Intelligent<br>
-      <span class="gradient">Solutions for the Real World.</span>
-    </h1>
-    <p>
-      Hello, I'm Faran Haider. I'm an Artificial Intelligence student
-      passionate about AI, software development, and creating technology
-      that solves meaningful real-world problems.
-    </p>
-    <div class="actions">
-      <a class="btn btn-primary" href="#projects">Explore My Projects ↗</a>
-      <a class="btn btn-secondary" href="#contact">Let's Connect</a>
+  <header class="topbar">
+    <div class="wrap nav">
+      <a class="brand" href="#home" aria-label="Faran Haider home">FH<b>.</b></a>
+      <button class="menu" id="menu" aria-expanded="false" aria-controls="navlinks" aria-label="Toggle navigation">Menu</button>
+      <nav class="navlinks" id="navlinks" aria-label="Main navigation">
+        <a href="#about">About</a><a href="#services">What I Do</a><a href="#skills">Expertise</a><a href="#work">Selected Work</a><a href="#approach">Approach</a><a class="nav-cta" href="#contact">Let's Talk ↗</a>
+      </nav>
     </div>
-  </div>
-</section>
+  </header>
 
-<section id="about">
-  <div class="container">
-    <div class="section-title reveal">
-      <h2>About <span class="gradient">Me</span></h2>
-      <p>Curiosity, continuous learning, and technology with purpose.</p>
-    </div>
-    <div class="about-grid">
-      <article class="card reveal">
-        <h3>My Journey</h3>
-        <p>
-          I'm an AI student building my foundations in programming,
-          intelligent systems, and modern software development. I enjoy
-          exploring how AI can help people, improve everyday processes,
-          and create new opportunities.
-        </p>
-        <p style="margin-top:14px">
-          My goal is to keep learning, build practical projects, and grow
-          into an AI engineer and entrepreneur who creates useful solutions.
-        </p>
-      </article>
-      <article class="card reveal">
-        <h3>What I'm Focused On</h3>
-        <div class="focus-list">
-          <div class="focus-item">
-            <span class="focus-icon">🧠</span>
-            <div><strong>Artificial Intelligence</strong>
-              <p>Exploring AI concepts and intelligent applications.</p></div>
+  <main>
+    <section class="hero" id="home">
+      <canvas id="particles" aria-hidden="true"></canvas>
+      <div class="wrap hero-grid">
+        <div class="hero-copy-block reveal">
+          <div class="availability"><span class="pulse"></span> Open to collaborations & meaningful opportunities</div>
+          <h1>Ideas into <span class="line gradient">Intelligent</span><span class="line">Impact.</span><span class="line role">AI Engineer <span class="gradient">&</span> Entrepreneur</span></h1>
+          <p class="hero-copy">I explore and build practical AI-powered solutions, intelligent workflows, and digital products. My focus is simple: use technology to solve real problems and create value that lasts.</p>
+          <div class="hero-actions">
+            <a class="btn primary" href="#work">Explore my work <span aria-hidden="true">↗</span></a>
+            <a class="btn secondary" href="#contact">Start a conversation</a>
           </div>
-          <div class="focus-item">
-            <span class="focus-icon">💻</span>
-            <div><strong>Software Development</strong>
-              <p>Learning to build reliable, practical software.</p></div>
-          </div>
-          <div class="focus-item">
-            <span class="focus-icon">🚀</span>
-            <div><strong>Problem Solving</strong>
-              <p>Turning ideas into useful projects through practice.</p></div>
+          <div class="hero-meta">
+            <div><strong>AI & Automation</strong>Intelligent experiences</div>
+            <div><strong>Product Thinking</strong>Ideas with purpose</div>
+            <div><strong>Build & Improve</strong>Practical execution</div>
           </div>
         </div>
-      </article>
-    </div>
-  </div>
-</section>
-
-<section id="skills">
-  <div class="container">
-    <div class="section-title reveal">
-      <h2>My <span class="gradient">Skills</span></h2>
-      <p>Technologies and topics I'm learning and exploring.</p>
-    </div>
-    <div class="skills-grid">
-      <article class="card skill-card reveal">
-        <h3>⌨ Programming</h3>
-        <p>Languages and web fundamentals.</p>
-        <div class="tags">
-          <span class="tag">C++</span>
-          <span class="tag">Python</span>
-          <span class="tag">HTML</span>
-          <span class="tag">CSS</span>
-          <span class="tag">JavaScript</span>
-        </div>
-      </article>
-      <article class="card skill-card reveal">
-        <h3>✧ AI & Intelligent Systems</h3>
-        <p>Areas I'm studying and exploring.</p>
-        <div class="tags">
-          <span class="tag">AI Fundamentals</span>
-          <span class="tag">Prompt Engineering</span>
-          <span class="tag">AI Agents</span>
-          <span class="tag">Machine Learning</span>
-          <span class="tag">Generative AI</span>
-        </div>
-      </article>
-      <article class="card skill-card reveal">
-        <h3>⚙ Tools & Workflow</h3>
-        <p>Tools for learning and building projects.</p>
-        <div class="tags">
-          <span class="tag">GitHub</span>
-          <span class="tag">Google Colab</span>
-          <span class="tag">VS Code</span>
-          <span class="tag">Git</span>
-        </div>
-      </article>
-    </div>
-  </div>
-</section>
-
-<section id="projects">
-  <div class="container">
-    <div class="section-title reveal">
-      <h2>Featured <span class="gradient">Projects</span></h2>
-      <p>A space to showcase practical work and experiments.</p>
-    </div>
-    <div class="projects-grid">
-      <article class="card reveal">
-        <div class="project-top">
-          <div class="project-icon">🤖</div>
-          <span class="project-number">PROJECT 01</span>
-        </div>
-        <h3>AI Assistant / Chatbot</h3>
-        <p>
-          An AI assistant concept designed to answer questions and help
-          users complete useful tasks.
-        </p>
-        <div class="tags">
-          <span class="tag">Python</span><span class="tag">AI</span>
-        </div>
-        <div class="project-links">
-          <a href="https://github.com/faranhaider12" target="_blank"
-             rel="noopener noreferrer">My GitHub ↗</a>
-        </div>
-      </article>
-      <article class="card reveal">
-        <div class="project-top">
-          <div class="project-icon">🚌</div>
-          <span class="project-number">PROJECT 02</span>
-        </div>
-        <h3>Student Bus Tracking System</h3>
-        <p>
-          A proposed system to help students check bus routes and location
-          updates. GPS integration can be added during development.
-        </p>
-        <div class="tags">
-          <span class="tag">Software Design</span>
-          <span class="tag">GPS Concept</span>
-        </div>
-        <div class="project-links">
-          <a href="https://github.com/faranhaider12" target="_blank"
-             rel="noopener noreferrer">My GitHub ↗</a>
-        </div>
-      </article>
-      <article class="card reveal">
-        <div class="project-top">
-          <div class="project-icon">🌐</div>
-          <span class="project-number">PROJECT 03</span>
-        </div>
-        <h3>Personal Portfolio Website</h3>
-        <p>
-          A responsive personal website to present my learning journey,
-          interests, and future projects.
-        </p>
-        <div class="tags">
-          <span class="tag">HTML</span><span class="tag">CSS</span>
-          <span class="tag">JavaScript</span>
-        </div>
-        <div class="project-links">
-          <a href="https://github.com/faranhaider12/faranh12.github.io"
-             target="_blank" rel="noopener noreferrer">Source Code ↗</a>
-          <a href="https://faranh12.github.io" target="_blank"
-             rel="noopener noreferrer">Live Website ↗</a>
-        </div>
-      </article>
-      <article class="card reveal">
-        <div class="project-top">
-          <div class="project-icon">💡</div>
-          <span class="project-number">PROJECT 04</span>
-        </div>
-        <h3>Your Next Project</h3>
-        <p>
-          Replace this card with a project you have built. Explain the
-          problem, your solution, and the technologies you used.
-        </p>
-        <div class="tags">
-          <span class="tag">Add Your Technologies</span>
-        </div>
-        <div class="project-links">
-          <a href="#contact">Ask About My Work ↗</a>
-        </div>
-      </article>
-    </div>
-  </div>
-</section>
-
-<section id="education">
-  <div class="container">
-    <div class="section-title reveal">
-      <h2>Education & <span class="gradient">Growth</span></h2>
-      <p>Building a strong foundation for the future.</p>
-    </div>
-    <div class="timeline">
-      <article class="card reveal">
-        <small>EDUCATION</small>
-        <h3>Bachelor's Student in Artificial Intelligence</h3>
-        <p>
-          Studying AI concepts, programming, problem solving, and
-          computing fundamentals.
-        </p>
-        <p style="margin-top:10px">
-          Add your university name, expected graduation year, and relevant
-          coursework here.
-        </p>
-      </article>
-      <article class="card reveal">
-        <small>CONTINUOUS LEARNING</small>
-        <h3>Learning by Building</h3>
-        <p>
-          Developing practical programming skills, exploring AI tools,
-          and turning concepts into projects.
-        </p>
-      </article>
-    </div>
-  </div>
-</section>
-
-<section id="contact">
-  <div class="container">
-    <div class="card contact-card reveal">
-      <span class="eyebrow">Have an idea? Let's connect.</span>
-      <h2 style="font-size:clamp(30px,5vw,44px)">
-        Let's Build Something <span class="gradient">Meaningful</span>
-      </h2>
-      <p>
-        I'm interested in AI, technology, learning opportunities,
-        and projects that solve real-world problems.
-        Feel free to connect with me.
-      </p>
-      <div class="contact-links">
-        <!-- Replace the placeholder email below with your real email. -->
-        <a class="btn btn-primary"
-           href="mailto:YOUR_EMAIL@example.com">✉ Email Me</a>
-        <!-- Replace these URLs with your actual profile URLs. -->
-        <a class="btn btn-secondary"
-           href="https://www.linkedin.com/" target="_blank"
-           rel="noopener noreferrer">LinkedIn ↗</a>
-        <a class="btn btn-secondary"
-           href="https://github.com/faranhaider12" target="_blank"
-           rel="noopener noreferrer">GitHub ↗</a>
+        <aside class="profile-panel reveal" aria-label="Professional focus">
+          <div class="panel-top"><span>PROFILE / 001</span><span>INDEPENDENT BUILDER</span></div>
+          <div class="panel-symbol">FH</div>
+          <h3>Faran Haider</h3>
+          <p>AI Engineer & Entrepreneur focused on the intersection of artificial intelligence, software, and business opportunities.</p>
+          <div class="panel-tags"><span>Artificial Intelligence</span><span>AI Automation</span><span>Digital Products</span><span>Problem Solving</span></div>
+          <div class="panel-bottom"><span>Current direction</span><b>Build. Learn. Deliver.</b></div>
+        </aside>
       </div>
-    </div>
-  </div>
-</section>
-</main>
+    </section>
 
-<footer>
-  <div class="container">
-    <p>© <span id="year"></span> Faran Haider · Built with curiosity and code.</p>
-  </div>
-</footer>
+    <div class="trust-strip"><div class="wrap trust-inner"><strong>AREAS OF FOCUS</strong><span>Artificial Intelligence</span><span>Intelligent Automation</span><span>Software & Web</span><span>Entrepreneurship</span></div></div>
 
-<button id="top-btn" aria-label="Back to top">↑</button>
+    <section class="section" id="about">
+      <div class="wrap">
+        <div class="section-head reveal"><span class="kicker">A little about me</span><h2>Technology should create <span class="gradient">real value.</span></h2><p class="section-intro">I’m Faran Haider. I’m building at the intersection of AI engineering and entrepreneurship—combining technical curiosity with a practical, business-minded approach to solving problems.</p></div>
+        <div class="about-grid">
+          <article class="surface reveal">
+            <h3 style="font-size:1.25rem;margin-bottom:15px">From possibility to practical solutions</h3>
+            <p>I’m interested in how artificial intelligence can move beyond demos and become genuinely useful: helping people work smarter, simplifying processes, and enabling better digital experiences.</p>
+            <p>My approach is grounded in continuous improvement, thoughtful problem-solving, and building a strong technical foundation. I value clear communication, useful outcomes, and solutions designed around real needs.</p>
+          </article>
+          <div class="principles reveal">
+            <div class="principle"><span class="principle-icon">✦</span><div><strong>Business-minded thinking</strong><p>Start with the problem, the people it affects, and the value a solution should create.</p></div></div>
+            <div class="principle"><span class="principle-icon">⌘</span><div><strong>Practical engineering</strong><p>Choose the right tools and build with usability, reliability, and maintainability in mind.</p></div></div>
+            <div class="principle"><span class="principle-icon">↗</span><div><strong>Continuous growth</strong><p>Experiment, learn from feedback, and improve each iteration.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<script>
-const menuBtn = document.getElementById("menu-btn");
-const navLinks = document.getElementById("nav-links");
+    <section class="section" id="services">
+      <div class="wrap">
+        <div class="section-head center reveal"><span class="kicker">What I do</span><h2>Ideas, engineered for <span class="gradient">impact.</span></h2><p class="section-intro">Areas where I’m focused on creating value. For project enquiries, share your goal and we can discuss scope, feasibility, and the right approach.</p></div>
+        <div class="service-grid">
+          <article class="surface service reveal"><div class="service-icon">◈</div><h3>AI-Powered Solutions</h3><p>Explore intelligent assistants, AI-enabled applications, and practical use cases that improve user experiences.</p><small>AI APPLICATIONS · GENERATIVE AI</small></article>
+          <article class="surface service reveal"><div class="service-icon">⌁</div><h3>Workflow Automation</h3><p>Identify repetitive tasks and design smarter workflows that can reduce manual effort and streamline operations.</p><small>PROCESS DESIGN · AUTOMATION</small></article>
+          <article class="surface service reveal"><div class="service-icon">▣</div><h3>Web & Digital Experiences</h3><p>Build clean, responsive web experiences that communicate a product clearly and help businesses establish a strong digital presence.</p><small>WEB DEVELOPMENT · UX</small></article>
+          <article class="surface service reveal"><div class="service-icon">✧</div><h3>AI Product Exploration</h3><p>Shape early ideas into clear concepts, validate the problem, and map a practical path toward a useful product.</p><small>IDEATION · PRODUCT THINKING</small></article>
+          <article class="surface service reveal"><div class="service-icon">⌘</div><h3>AI Tool Integration</h3><p>Explore ways to connect AI capabilities with existing tools and workflows to make systems more useful.</p><small>AI INTEGRATION · WORKFLOWS</small></article>
+          <article class="surface service reveal"><div class="service-icon">↗</div><h3>Technical Collaboration</h3><p>Work through technical challenges, prototypes, and early-stage concepts with clear communication and an outcome-focused mindset.</p><small>COLLABORATION · PROTOTYPING</small></article>
+        </div>
+      </div>
+    </section>
 
-menuBtn.addEventListener("click", () => {
-  const open = navLinks.classList.toggle("open");
-  menuBtn.setAttribute("aria-expanded", String(open));
-  menuBtn.setAttribute("aria-label", open ? "Close navigation" : "Open navigation");
-});
+    <section class="section" id="skills">
+      <div class="wrap">
+        <div class="section-head reveal"><span class="kicker">Technical toolkit</span><h2>Knowledge meets <span class="gradient">execution.</span></h2><p class="section-intro">A growing toolkit across programming, AI concepts, and development tools. I aim to apply each skill through practical work.</p></div>
+        <div class="skill-layout">
+          <article class="surface skillbox reveal"><h3>Programming & Web</h3><p>Core languages and foundations for building software and web experiences.</p><div class="chips"><span class="chip">Python</span><span class="chip">C++</span><span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span></div></article>
+          <article class="surface skillbox reveal"><h3>Artificial Intelligence</h3><p>Areas of focus across modern AI and intelligent applications.</p><div class="chips"><span class="chip">AI Fundamentals</span><span class="chip">Generative AI</span><span class="chip">Prompt Engineering</span><span class="chip">AI Agents</span><span class="chip">Machine Learning</span></div></article>
+          <article class="surface skillbox reveal"><h3>Tools & Development</h3><p>Tools used for coding, experimentation, version control, and collaboration.</p><div class="chips"><span class="chip">Git</span><span class="chip">GitHub</span><span class="chip">VS Code</span><span class="chip">Google Colab</span></div></article>
+          <article class="surface skillbox reveal"><h3>Product & Business</h3><p>Ways of thinking that connect technical work with customer and business needs.</p><div class="chips"><span class="chip">Problem Discovery</span><span class="chip">Product Thinking</span><span class="chip">Entrepreneurship</span><span class="chip">Solution Design</span></div></article>
+        </div>
+      </div>
+    </section>
 
-document.querySelectorAll(".nav-links a").forEach(link => {
-  link.addEventListener("click", () => {
-    navLinks.classList.remove("open");
-    menuBtn.setAttribute("aria-expanded", "false");
-  });
-});
+    <section class="section" id="work">
+      <div class="wrap">
+        <div class="section-head reveal"><span class="kicker">Selected work</span><h2>Concepts and projects in <span class="gradient">progress.</span></h2><p class="section-intro">A transparent look at areas I’m exploring. Project stages are labelled clearly—only completed, verifiable work should be presented as a finished case study.</p></div>
+        <div class="project-grid">
+          <article class="surface project reveal"><div class="project-head"><span class="project-icon">✧</span><span class="status">Concept</span></div><h3>AI Assistant & Chatbot</h3><p>An assistant concept focused on making information easier to access and helping users complete common tasks through a conversational interface.</p><div class="chips"><span class="chip">Python</span><span class="chip">AI</span><span class="chip">Conversational UX</span></div><p class="project-note">Exploration concept — add a live demo, repository, and implementation details when available.</p></article>
+          <article class="surface project reveal"><div class="project-head"><span class="project-icon">⌖</span><span class="status">Proposed</span></div><h3>Smart Bus Tracking</h3><p>A proposed transport information system to help passengers view routes and receive useful location updates, with GPS functionality as a potential component.</p><div class="chips"><span class="chip">Product Concept</span><span class="chip">GPS</span><span class="chip">User Experience</span></div><p class="project-note">Proposal stage — technical implementation and deployment are not yet claimed.</p></article>
+          <article class="surface project reveal"><div class="project-head"><span class="project-icon">▧</span><span class="status">Live</span></div><h3>Personal Portfolio Website</h3><p>This portfolio: a responsive web experience designed to present my focus, technical interests, and selected work in a clear professional format.</p><div class="chips"><span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span></div><div style="margin-top:18px"><a class="btn secondary" href="https://github.com/faranhaider12/faranh12.github.io" target="_blank" rel="noopener noreferrer">View source ↗</a></div></article>
+          <article class="surface project reveal"><div class="project-head"><span class="project-icon">◎</span><span class="status">Exploration</span></div><h3>AI & Automation Experiments</h3><p>A space for future experiments connecting AI tools, automation workflows, and practical business use cases.</p><div class="chips"><span class="chip">Generative AI</span><span class="chip">Automation</span><span class="chip">Prototyping</span></div><p class="project-note">More details will be added as experiments become documented projects.</p></article>
+        </div>
+      </div>
+    </section>
 
-document.getElementById("year").textContent = new Date().getFullYear();
+    <section class="section" id="approach">
+      <div class="wrap">
+        <div class="section-head center reveal"><span class="kicker">How I approach work</span><h2>Clear thinking. <span class="gradient">Useful outcomes.</span></h2><p class="section-intro">A simple process for turning an idea or business challenge into a solution worth building.</p></div>
+        <div class="process-grid">
+          <article class="step reveal"><span>01 / DISCOVER</span><h3>Understand the problem</h3><p>Clarify goals, users, constraints, and what success should look like.</p></article>
+          <article class="step reveal"><span>02 / DESIGN</span><h3>Plan the solution</h3><p>Explore options and choose a realistic technical direction.</p></article>
+          <article class="step reveal"><span>03 / BUILD</span><h3>Create and test</h3><p>Develop an initial version, test assumptions, and improve the experience.</p></article>
+          <article class="step reveal"><span>04 / IMPROVE</span><h3>Learn and iterate</h3><p>Use feedback and results to refine the solution over time.</p></article>
+        </div>
+      </div>
+    </section>
 
-const topBtn = document.getElementById("top-btn");
-window.addEventListener("scroll", () => {
-  topBtn.style.display = window.scrollY > 400 ? "block" : "none";
-});
-topBtn.addEventListener("click", () => {
-  window.scrollTo({ top: 0, behavior: "smooth" });
-});
+    <section class="section" id="background">
+      <div class="wrap">
+        <div class="section-head reveal"><span class="kicker">Background</span><h2>Foundation for what’s <span class="gradient">next.</span></h2><p class="section-intro">A professional profile is strongest when education and credentials are accurate and verifiable.</p></div>
+        <div class="growth">
+          <article class="surface growth-card reveal"><h3>Education</h3><p>Artificial Intelligence studies, with a focus on programming, computing fundamentals, and intelligent systems.</p><p style="margin-top:13px;color:#8fa0bc;font-size:.76rem">University, dates, and qualifications can be added once confirmed.</p></article>
+          <article class="surface growth-card reveal"><h3>Professional development</h3><div class="growth-list"><div class="growth-row"><b>AI & Machine Learning</b><span>Ongoing technical development</span></div><div class="growth-row"><b>Software Engineering</b><span>Programming and project practice</span></div><div class="growth-row"><b>Entrepreneurship</b><span>Product and business exploration</span></div></div></article>
+        </div>
+      </div>
+    </section>
 
-const revealObserver = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add("visible");
-      revealObserver.unobserve(entry.target);
+    <section class="section" id="contact">
+      <div class="wrap">
+        <div class="surface contact reveal">
+          <span class="kicker">Let's work together</span>
+          <h2>Have a challenge worth <span class="gradient">solving?</span></h2>
+          <p class="section-intro">Whether you’re exploring an AI idea, considering an automation opportunity, or looking to collaborate on a digital product, I’d be glad to hear what you’re working on.</p>
+          <div class="contact-actions"><a class="btn primary" href="https://github.com/faranhaider12" target="_blank" rel="noopener noreferrer">Connect on GitHub ↗</a><a class="btn secondary" href="https://github.com/faranhaider12/faranh12.github.io" target="_blank" rel="noopener noreferrer">Discuss this portfolio ↗</a></div>
+          <p style="font-size:.76rem;color:#8494af;margin:22px auto 0">For direct enquiries, add your preferred professional email and LinkedIn profile to this section.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer><div class="wrap footer-inner"><span>© <span id="year"></span> Faran Haider. Built with purpose.</span><div class="footer-links"><a href="#home">Back to top ↑</a><a href="https://github.com/faranhaider12" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div></div></footer>
+
+  <script>
+    const menu = document.getElementById('menu');
+    const nav = document.getElementById('navlinks');
+    menu.addEventListener('click', () => {
+      const open = nav.classList.toggle('open');
+      menu.setAttribute('aria-expanded', String(open));
+    });
+    nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      nav.classList.remove('open'); menu.setAttribute('aria-expanded','false');
+    }));
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const revealItems = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window && !reduceMotion) {
+      const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+        if (entry.isIntersecting) { entry.target.classList.add('show'); observer.unobserve(entry.target); }
+      }), {threshold: .12});
+      revealItems.forEach(el => observer.observe(el));
+    } else revealItems.forEach(el => el.classList.add('show'));
+
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+    let points = [], w = 0, h = 0, raf = 0, running = false;
+    function resize() {
+      const rect = canvas.getBoundingClientRect(), dpr = Math.min(devicePixelRatio || 1, 2);
+      w = rect.width; h = rect.height; canvas.width = w*dpr; canvas.height = h*dpr; ctx.setTransform(dpr,0,0,dpr,0,0);
+      points = Array.from({length:Math.min(58,Math.max(22,Math.floor(w/19)))},()=>({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-.5)*.22,vy:(Math.random()-.5)*.22}));
+      if (reduceMotion) draw();
     }
-  });
-}, { threshold: 0.12 });
-
-document.querySelectorAll(".reveal").forEach(el => revealObserver.observe(el));
-
-/* Animated neural-network background */
-const canvas = document.getElementById("network");
-const ctx = canvas.getContext("2d");
-let particles = [];
-let width = 0;
-let height = 0;
-let animationFrame;
-const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-function resizeCanvas() {
-  const rect = canvas.getBoundingClientRect();
-  const dpr = Math.min(window.devicePixelRatio || 1, 2);
-  width = rect.width;
-  height = rect.height;
-  canvas.width = width * dpr;
-  canvas.height = height * dpr;
-  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-  const count = Math.min(75, Math.max(25, Math.floor(width / 16)));
-  particles = Array.from({ length: count }, () => ({
-    x: Math.random() * width,
-    y: Math.random() * height,
-    vx: (Math.random() - 0.5) * 0.35,
-    vy: (Math.random() - 0.5) * 0.35,
-    r: Math.random() * 1.8 + 0.7
-  }));
-}
-
-function drawNetwork() {
-  ctx.clearRect(0, 0, width, height);
-
-  particles.forEach((p, i) => {
-    if (!reducedMotion) {
-      p.x += p.vx;
-      p.y += p.vy;
-      if (p.x < 0 || p.x > width) p.vx *= -1;
-      if (p.y < 0 || p.y > height) p.vy *= -1;
+    function draw() {
+      ctx.clearRect(0,0,w,h);
+      points.forEach((p,i)=>{
+        if (!reduceMotion) {p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>w)p.vx*=-1;if(p.y<0||p.y>h)p.vy*=-1;}
+        ctx.beginPath();ctx.arc(p.x,p.y,1.35,0,Math.PI*2);ctx.fillStyle='rgba(133,177,255,.7)';ctx.fill();
+        for(let j=i+1;j<points.length;j++){const q=points[j],dx=p.x-q.x,dy=p.y-q.y,d=Math.hypot(dx,dy);if(d<105){ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);ctx.strokeStyle='rgba(117,151,255,'+(0.12*(1-d/105))+')';ctx.stroke();}}
+      });
+      if(!reduceMotion&&running)raf=requestAnimationFrame(draw);
     }
-
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-    ctx.fillStyle = "rgba(112,165,255,0.75)";
-    ctx.fill();
-
-    for (let j = i + 1; j < particles.length; j++) {
-      const q = particles[j];
-      const dx = p.x - q.x;
-      const dy = p.y - q.y;
-      const distance = Math.sqrt(dx * dx + dy * dy);
-
-      if (distance < 115) {
-        ctx.beginPath();
-        ctx.moveTo(p.x, p.y);
-        ctx.lineTo(q.x, q.y);
-        ctx.strokeStyle = `rgba(104,139,255,${0.16 * (1 - distance / 115)})`;
-        ctx.lineWidth = 1;
-        ctx.stroke();
-      }
-    }
-  });
-
-  if (!reducedMotion) {
-    animationFrame = requestAnimationFrame(drawNetwork);
-  }
-}
-
-resizeCanvas();
-drawNetwork();
-
-window.addEventListener("resize", () => {
-  cancelAnimationFrame(animationFrame);
-  resizeCanvas();
-  drawNetwork();
-});
-</script>
+    function start(){if(!running&&!reduceMotion){running=true;draw();}}
+    function stop(){running=false;cancelAnimationFrame(raf);}
+    resize();
+    if(!reduceMotion){const heroObserver=new IntersectionObserver(entries=>entries.forEach(e=>e.isIntersecting?start():stop()));heroObserver.observe(document.querySelector('.hero'));}
+    window.addEventListener('resize',()=>{resize();});
+  </script>
 </body>
 </html>

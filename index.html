@@ -21,6 +21,21 @@ body:after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opac
 .btn,.project-link{position:relative}.btn:active{transform:scale(.97)}.service,.skill,.project,.step,.principle{will-change:transform}.avatar{position:relative}.avatar:after{content:"";position:absolute;inset:-6px;border-radius:26px;border:1px solid #b8f36b35;animation:ring 4s ease-in-out infinite}
 @keyframes titleReveal{from{opacity:0;filter:blur(10px);transform:translateY(32px)}to{opacity:1;filter:blur(0);transform:translateY(0)}}@keyframes shine{to{background-position:200% center}}@keyframes ring{0%,100%{transform:scale(1);opacity:.5}50%{transform:scale(1.07);opacity:.12}}
 @media(prefers-reduced-motion:reduce){body:after{display:none}.hero h1,.hero h1 em,.avatar:after{animation:none!important}}
+
+/* Smooth premium motion system */
+:root{--scroll-progress:0;--px:50vw;--py:40vh}
+body{background-image:radial-gradient(500px circle at var(--px) var(--py),rgba(184,243,107,.055),transparent 65%)}
+#scroll-progress{position:fixed;top:0;left:0;height:2px;width:100%;z-index:100;background:linear-gradient(90deg,var(--accent),#e7ffc2);transform:scaleX(var(--scroll-progress));transform-origin:left;box-shadow:0 0 12px #b8f36b66}
+.reveal{transform:translateY(36px) scale(.985);filter:blur(3px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1),filter .8s ease;transition-delay:var(--reveal-delay,0ms)}
+.reveal.visible{filter:blur(0);transform:translateY(0) scale(1)}
+.cards .reveal,.skills-grid .reveal,.steps .reveal,.principles .reveal{--reveal-delay:calc(var(--i,0)*85ms)}
+.service,.skill,.project,.step,.principle,.panel{transition:transform .45s cubic-bezier(.2,.75,.25,1),border-color .35s,box-shadow .45s}
+.hoverlift:hover{transform:translateY(-8px) scale(1.012);box-shadow:0 22px 45px #0005,0 0 0 1px #b8f36b18}
+.btn{overflow:hidden;transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s,border-color .35s}
+.btn:before{content:"";position:absolute;inset:0;transform:translateX(-120%);background:linear-gradient(110deg,transparent,rgba(255,255,255,.18),transparent);transition:transform .65s}
+.btn:hover:before{transform:translateX(120%)}
+.avatar{transition:transform .5s cubic-bezier(.2,.8,.2,1)}.hero-panel:hover .avatar{transform:translateY(-3px) scale(1.04)}
+@media(prefers-reduced-motion:reduce){#scroll-progress{display:none}body{background-image:none}.reveal{filter:none!important;transition:none!important;transform:none!important}}
 </style>
 </head>
 <body>
@@ -42,4 +57,10 @@ if(!reduced)document.querySelectorAll('.cards .service,.skills-grid .skill,.card
 
 // Pointer-follow ambient lighting and gentle 3D tilt (desktop only)
 if(!reduced&&matchMedia('(pointer:fine)').matches){const panel=document.querySelector('.hero-panel');panel.addEventListener('mousemove',e=>{const r=panel.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;panel.style.transform='perspective(900px) rotateY('+x*7+'deg) rotateX('+(-y*6)+'deg)'});panel.addEventListener('mouseleave',()=>panel.style.transform='');document.addEventListener('mousemove',e=>{document.documentElement.style.setProperty('--px',e.clientX+'px');document.documentElement.style.setProperty('--py',e.clientY+'px')})}
+
+// Scroll progress + polished staggered reveal and subtle card motion
+const progress=document.createElement('div');progress.id='scroll-progress';document.body.prepend(progress);
+if(!reduced){let ticking=false;const updateProgress=()=>{const max=document.documentElement.scrollHeight-innerHeight;document.documentElement.style.setProperty('--scroll-progress',max>0?String(scrollY/max):'0');ticking=false};addEventListener('scroll',()=>{if(!ticking){requestAnimationFrame(updateProgress);ticking=true}},{passive:true});updateProgress();
+ document.querySelectorAll('.cards .reveal,.skills-grid .reveal,.steps .reveal,.principles .reveal').forEach((el,i)=>el.style.setProperty('--i',i%6));
+ if(matchMedia('(pointer:fine)').matches){document.querySelectorAll('.service,.project,.skill,.step,.principle').forEach(card=>{card.addEventListener('mousemove',e=>{const r=card.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;card.style.transform='translateY(-5px) perspective(700px) rotateX('+(-y*2.5)+'deg) rotateY('+(x*2.5)+'deg)'});card.addEventListener('mouseleave',()=>card.style.transform='')})}}
 </script></body></html>

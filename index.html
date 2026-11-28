@@ -36,6 +36,39 @@ body{background-image:radial-gradient(500px circle at var(--px) var(--py),rgba(1
 .btn:hover:before{transform:translateX(120%)}
 .avatar{transition:transform .5s cubic-bezier(.2,.8,.2,1)}.hero-panel:hover .avatar{transform:translateY(-3px) scale(1.04)}
 @media(prefers-reduced-motion:reduce){#scroll-progress{display:none}body{background-image:none}.reveal{filter:none!important;transition:none!important;transform:none!important}}
+
+/* MotionSites reference inspired cinematic orbital redesign */
+:root{--bg:#050506;--surface:#101012;--surface2:#171719;--text:#f4f2f3;--muted:#a3a0a5;--line:#292528;--accent:#ff454b}
+body{background:#050506;color:#f4f2f3}
+body:before{background:radial-gradient(ellipse at 50% 30%,rgba(190,20,38,.16),transparent 38%),radial-gradient(ellipse at 90% 8%,rgba(255,60,65,.07),transparent 35%)}
+body:after{opacity:.1;background-image:linear-gradient(rgba(255,50,65,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,50,65,.025) 1px,transparent 1px)}
+.logo span,.eyebrow,.hero h1 em,.project-link,.service .symbol,.project-symbol,.ticker-row strong{color:#ff555b}
+.hero{min-height:730px;padding:95px 0 110px;overflow:hidden}
+.hero-grid{grid-template-columns:1.25fr .85fr;gap:40px;position:relative;z-index:2}
+.hero h1{font-size:clamp(4rem,8vw,7rem);letter-spacing:-.085em;text-wrap:balance}
+.hero h1 em{background:linear-gradient(100deg,#fff,#ff5a60,#a51925);background-size:200%;background-clip:text;-webkit-background-clip:text;color:transparent}
+.intro{max-width:560px}
+.primary{background:#d92c35;color:#fff}.primary:hover{box-shadow:0 8px 32px #ff263a44}
+.outline:hover{border-color:#ff555b}
+.hero-panel{background:#0c0b0de8;border-color:#3b272b;box-shadow:0 24px 90px #0008;backdrop-filter:blur(18px)}
+.avatar{background:radial-gradient(circle at 35% 25%,#ff8b91,#9e2029 40%,#200b0e 78%);border-color:#a9454c;color:white;box-shadow:0 0 45px #d42b3c33}
+.avatar:after{border-color:#ff646a55}
+.hero-panel:after{background:#ff334012}
+.pills span{background:#1a1417;border-color:#332328}
+.navlinks a:hover{color:#ff555b}
+.panel,.principle,.service,.skill,.project,.step{background:#101012;border-color:#292528}
+.hoverlift:hover{border-color:#ff454b55;box-shadow:0 20px 45px #0006,0 0 0 1px #ff454b15}
+.contact-panel{background:radial-gradient(ellipse at 50% 0%,#ff454b13,transparent 55%),#101012}
+.contact-panel h2 em{color:#ff555b}
+.btn:before{background:linear-gradient(110deg,transparent,rgba(255,255,255,.16),transparent)}
+/* CSS drawn animated orbital sculpture */
+.hero:before{content:"";position:absolute;width:min(48vw,600px);height:min(48vw,600px);left:50%;top:45%;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle at 36% 30%,#ff9b9f 0,#e03d48 9%,#7d101c 24%,#23080c 48%,#080608 68%);box-shadow:0 0 100px #e326381b,inset -45px -55px 85px #000b;opacity:.8;pointer-events:none;z-index:0;animation:orbPulse 8s ease-in-out infinite}
+.hero:after{content:"";position:absolute;width:min(53vw,660px);height:min(19vw,230px);left:50%;top:44%;transform:translate(-50%,-50%) rotate(-27deg);border:2px solid #b9535c;border-radius:50%;box-shadow:0 0 30px #d33b4b22,inset 0 0 22px #d33b4b18;z-index:1;pointer-events:none;animation:orbitSpin 22s linear infinite}
+.hero-panel{position:relative;z-index:3}
+@keyframes orbPulse{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-50%) scale(1.035)}}
+@keyframes orbitSpin{0%{transform:translate(-50%,-50%) rotate(-27deg)}50%{transform:translate(-50%,-50%) rotate(27deg)}100%{transform:translate(-50%,-50%) rotate(-27deg)}}
+@media(max-width:850px){.hero-grid{grid-template-columns:1fr}.hero:before{width:75vw;height:75vw;left:65%;top:40%;opacity:.45}.hero:after{width:82vw;height:28vw;left:65%;top:40%}}
+@media(max-width:600px){.hero{padding-top:60px}.hero:before{width:90vw;height:90vw;left:50%;top:42%;opacity:.35}.hero:after{width:95vw;height:30vw;left:50%;top:42%}}
 </style>
 </head>
 <body>
